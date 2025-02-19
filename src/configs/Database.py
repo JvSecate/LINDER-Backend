@@ -7,7 +7,7 @@ from configs.Environment import get_environment_variables
 env = get_environment_variables()
 
 # Generate Database URL
-DATABASE_URL = f"{env.DATABASE_DIALECT}://{env.DATABASE_USERNAME}:{env.DATABASE_PASSWORD}@{env.DATABASE_HOSTNAME}:{env.DATABASE_PORT}/{env.DATABASE_NAME}"
+DATABASE_URL = "mysql://root:root@db:3306/db"
 
 # Create Database Engine
 Engine = create_engine(
@@ -23,5 +23,6 @@ def get_db_connection():
     db = scoped_session(SessionLocal)
     try:
         yield db
+        print("Database Connection")
     finally:
         db.close()

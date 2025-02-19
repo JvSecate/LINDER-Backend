@@ -6,8 +6,10 @@ from pydantic_settings import BaseSettings
 
 @lru_cache
 def get_env_filename():
-    exists = os.path.exists(".env.test")
-    return f".env.test" if exists else ".env"
+    exists = os.path.exists(".env.teste")
+    env_filename = ".env.teste" if exists else ".env"
+    print(f"Loading environment file: {env_filename}")  # Debugging statement
+    return env_filename
 
 
 class EnvironmentSettings(BaseSettings):

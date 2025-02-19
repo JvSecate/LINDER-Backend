@@ -27,6 +27,10 @@ app = FastAPI(
     openapi_tags=Tags,
 )
 
+@app.get("/")
+def read_root():
+    return {"message": "Hello from FastAPI!"}
+
 # Add Routers
 app.include_router(UserRouter)
 app.include_router(CountryRouter)

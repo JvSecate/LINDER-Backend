@@ -1,9 +1,13 @@
 version: '3'
 
 services:
-  db: 
+  db:
     image: mysql:5.7.44
     restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db
@@ -12,5 +16,16 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
       MYSQL_HOST: db
       MYSQL_PORT: 3306
+  backend:
+    build: .
+    restart: always
+    depends_on:
+      - db
     ports:
-      - 3306:3306
+      - "8000:8000"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
